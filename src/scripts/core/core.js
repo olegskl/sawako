@@ -18,8 +18,8 @@ function main() {
   requestAnimationFrame(main);
 
   move(movementVector, pressedKeys);
-  mesh.position.x += movementVector.x * 30;
-  mesh.position.y += movementVector.y * 30;
+  mesh.position.x += movementVector.x * 25;
+  mesh.position.y += movementVector.y * 25;
 
   renderer.render(scene, camera);
 }
