@@ -1,20 +1,28 @@
-import {Vector2} from 'three.cjs';
-
-export default function move(keys) {
-  const vec = new Vector2(0, 0);
+export default function move(vec, keys) {
 
   if (keys.ArrowRight) {
-    vec.setX(1);
-  }
-  if (keys.ArrowLeft) {
-    vec.setX(-1);
-  }
-  if (keys.ArrowUp) {
-    vec.setY(1);
-  }
-  if (keys.ArrowDown) {
-    vec.setY(-1);
+    vec.setX(vec.x + 0.4);
   }
 
-  return vec.normalize();
+  if (keys.ArrowLeft) {
+    vec.setX(vec.x - 0.4);
+  }
+
+  if (keys.ArrowUp) {
+    vec.setY(vec.y + 0.4);
+  }
+
+  if (keys.ArrowDown) {
+    vec.setY(vec.y - 0.4);
+  }
+
+  vec.multiplyScalar(0.8);
+
+  if (vec.x > -0.1 && vec.x < 0.1) {
+    vec.setX(0);
+  }
+  if (vec.y > -0.1 && vec.y < 0.1) {
+    vec.setY(0);
+  }
+
 }
