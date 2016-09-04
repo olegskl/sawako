@@ -1,14 +1,20 @@
-export default function move(character, keys) {
+import {Vector2} from 'three.cjs';
+
+export default function move(keys) {
+  const vec = new Vector2(0, 0);
+
   if (keys.ArrowRight) {
-    character.position.x += 15;
+    vec.setX(1);
   }
   if (keys.ArrowLeft) {
-    character.position.x -= 15;
+    vec.setX(-1);
   }
   if (keys.ArrowUp) {
-    character.position.y += 15;
+    vec.setY(1);
   }
   if (keys.ArrowDown) {
-    character.position.y -= 15;
+    vec.setY(-1);
   }
+
+  return vec.normalize();
 }

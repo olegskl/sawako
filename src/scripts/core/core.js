@@ -2,7 +2,6 @@ import move from './move';
 import init from './init';
 
 const {scene, camera, mesh, renderer} = init();
-
 const pressedKeys = {};
 
 window.addEventListener('keydown', event => {
@@ -16,7 +15,9 @@ window.addEventListener('keyup', event => {
 function main() {
   requestAnimationFrame(main);
 
-  move(mesh, pressedKeys);
+  const vec = move(pressedKeys);
+  mesh.position.x += vec.x * 25;
+  mesh.position.y += vec.y * 25;
 
   mesh.rotation.x += 0.01;
   mesh.rotation.y += 0.02;
