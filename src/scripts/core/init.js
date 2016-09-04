@@ -1,9 +1,10 @@
 import THREE from 'three.cjs';
 
-export default function init() {
+export default function init(fov, width, height) {
   const scene = new THREE.Scene();
+  const aspectRatio = width / height;
 
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+  const camera = new THREE.PerspectiveCamera(fov, aspectRatio, 1, 10000);
   camera.position.z = 1000;
 
   const geometry = new THREE.CircleGeometry(20, 32);
@@ -13,7 +14,7 @@ export default function init() {
   scene.add(mesh);
 
   const renderer = new THREE.WebGLRenderer({antialias: true});
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(width, window.innerHeight);
 
   document.body.appendChild(renderer.domElement);
 
