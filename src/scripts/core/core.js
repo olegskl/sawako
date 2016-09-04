@@ -2,6 +2,7 @@ import {Vector2} from 'three.cjs';
 import move from './move';
 import init from './init';
 import {restrict, dimensions} from './restrict';
+import {addParticles, moveParticles} from './particles';
 
 const fov = 75;
 
@@ -11,6 +12,7 @@ const movementVector = new Vector2(0, 0);
 const d = dimensions(fov, window.innerWidth / window.innerHeight);
 const xMax = d.width / 2 - 20;
 const yMax = d.height / 2 - 20;
+const particles = addParticles(100, scene, xMax, yMax);
 
 window.addEventListener('keydown', event => {
   pressedKeys[event.key] = true;
@@ -23,9 +25,11 @@ window.addEventListener('keyup', event => {
 function main() {
   requestAnimationFrame(main);
 
+  moveParticles(particles, xMax, yMax);
+
   move(movementVector, pressedKeys);
-  mesh.position.x += movementVector.x * 25;
-  mesh.position.y += movementVector.y * 25;
+  mesh.position.x += movementVector.x * 15;
+  mesh.position.y += movementVector.y * 15;
 
   restrict(mesh.position, xMax, yMax);
 
