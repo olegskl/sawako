@@ -1,0 +1,7 @@
+{
+  "extends": "meetic",
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}
