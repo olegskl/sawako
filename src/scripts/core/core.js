@@ -28,8 +28,9 @@ function main() {
   moveParticles(particles, xMax, yMax);
 
   move(movementVector, pressedKeys);
-  mesh.position.x += movementVector.x * 20;
-  mesh.position.y += movementVector.y * 20;
+  const maxSpeed = pressedKeys.Shift ? 8 : 20;
+  mesh.position.x += movementVector.x * maxSpeed;
+  mesh.position.y += movementVector.y * maxSpeed;
 
   restrict(mesh.position, xMax, yMax);
 
