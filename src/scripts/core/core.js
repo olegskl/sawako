@@ -28,8 +28,8 @@ function main() {
   moveParticles(particles, xMax, yMax);
 
   move(movementVector, pressedKeys);
-  mesh.position.x += movementVector.x * 15;
-  mesh.position.y += movementVector.y * 15;
+  mesh.position.x += movementVector.x * 20;
+  mesh.position.y += movementVector.y * 20;
 
   restrict(mesh.position, xMax, yMax);
 

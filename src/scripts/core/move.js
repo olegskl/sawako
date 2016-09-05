@@ -1,28 +1,42 @@
+/* eslint complexity: 1 */
+
+import {Vector2} from 'three.cjs';
+
+const targetVec = new Vector2(0, 0);
+
 export default function move(vec, keys) {
+  const {ArrowUp, ArrowDown, ArrowLeft, ArrowRight} = keys;
 
-  vec.multiplyScalar(0.7);
-
-  if (keys.ArrowRight) {
-    vec.setX(vec.x + 0.5);
+  if (!ArrowUp && !ArrowDown && !ArrowLeft && !ArrowRight) {
+    // Decelerate hard when player isn't trying to move:
+    vec.lerp(targetVec, 0.5);
+    return;
   }
 
-  if (keys.ArrowLeft) {
-    vec.setX(vec.x - 0.5);
+  if (ArrowRight && ArrowLeft) {
+    targetVec.setX(0);
+  } else if (ArrowRight) {
+    targetVec.setX(1);
+  } else if (ArrowLeft) {
+    targetVec.setX(-1);
   }
 
-  if (keys.ArrowUp) {
-    vec.setY(vec.y + 0.5);
+  if (ArrowUp && ArrowDown) {
+    targetVec.setY(0);
+  } else if (ArrowUp) {
+    targetVec.setY(1);
+  } else if (ArrowDown) {
+    targetVec.setY(-1);
   }
 
-  if (keys.ArrowDown) {
-    vec.setY(vec.y - 0.5);
-  }
+  // Ensure that vertical and horizontal speeds
+  // don't stack when moving diagonally:
+  targetVec.normalize();
 
-  if (vec.x > -0.1 && vec.x < 0.1) {
-    vec.setX(0);
-  }
-  if (vec.y > -0.1 && vec.y < 0.1) {
-    vec.setY(0);
-  }
+  // Accelerate slowly:
+  vec.lerp(targetVec, 0.3);
 
+  // Resetting the target vector to make it ready
+  // for the next game loop iteration:
+  targetVec.set(0, 0);
 }
