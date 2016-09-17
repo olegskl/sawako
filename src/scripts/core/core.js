@@ -22,6 +22,12 @@ window.addEventListener('keyup', event => {
   delete pressedKeys[event.key];
 });
 
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
 function main() {
   requestAnimationFrame(main);
 
